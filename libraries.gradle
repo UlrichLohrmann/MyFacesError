@@ -1,0 +1,35 @@
+/** Definition der Versionen und Maven Artefakte der verwendeten
+ * Libraries.
+ */
+
+// Die Versionen der einzelnen Libraries
+def versions = [
+        javax: [
+                javaeeapi: '8.0',
+                ejbapi: '3.0',
+                concurrentapi: '1.1'
+        ],
+        webservices: [
+                api: '2.4.7'
+        ],
+        liberty: [
+                shared: '1.0.3'
+        ],
+]
+
+// Die Maven Koordinaten und Versionen der Dependencies der
+// Applikation PPH
+ext.libraries = [
+        javax: [
+                javaeeapi: "javax:javaee-api:${versions.javax.javaeeapi}",
+                ejbapi: "javax.ejb:ejb-api:${versions.javax.ejbapi}",
+                concurrentapi: "javax.enterprise.concurrent:javax.enterprise.concurrent-api:${versions.javax.concurrentapi}",
+        ],
+        webservices: [
+                api: "org.glassfish.metro:webservices-api:${versions.webservices.api}",
+                rt: "org.glassfish.metro:webservices-rt:${versions.webservices.api}"
+        ],
+        liberty: [
+                shared: "de.dsv.pas:libertyShared:${versions.liberty.shared}"
+        ],
+]

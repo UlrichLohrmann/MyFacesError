@@ -1,0 +1,13 @@
+plugins {
+    id 'war'
+}
+
+version 'unspecified'
+
+
+dependencies {
+    implementation "org.apache.myfaces.core:myfaces-api:2.2.13"
+    implementation "org.apache.myfaces.core:myfaces-impl:2.2.13"
+    implementation 'org.primefaces:primefaces:7.0'
+
+}

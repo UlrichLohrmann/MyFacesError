@@ -1,0 +1,59 @@
+/**
+ * Hinzufuegen des Nexus Repository Managers fuer die Aufloesung von eigenen
+ * Plugins.
+ */
+pluginManagement {
+    repositories {
+        maven {
+            url = uri("https://lvnexust01.dsv-gruppe.de:8443/repository/gradle-plugin-public/")
+        }
+        mavenLocal()
+    }
+}
+
+
+//-------------------------------------------------------------------
+// Steuerung der Repositories fuer die Aufloesung der Dependencies
+//
+def getIvyURL = {
+    def     localShared = "D:/tools/ivy/shared"
+
+    if (System.getProperty("os.name").startsWithIgnoreCase("Windows")) {
+        if (new File(localShared).exists()) {
+            return localShared;
+        }
+        else {
+            return "T:/tools/ivy/shared";
+        }
+    }
+    else {
+        return "/work/development/tools/ivy/shared"
+    }
+}
+
+dependencyResolutionManagement {
+    repositories {
+        maven {
+            url = uri("https://lvnexust01.dsv-gruppe.de:8443/repository/PASMavenGroup")
+        }
+        ivy {
+            url = uri(getIvyURL())
+            patternLayout{
+                artifact("[organisation]/[module]/[revision]/[type]s/[artifact].[ext]")
+                ivy("[organisation]/[module]/[revision]/[type]s/[artifact].[ext]")
+            }
+        }
+        mavenLocal {
+            content {
+                includeGroup("de.dsv.pas")
+            }
+        }
+    }
+}
+
+/**
+ * Die Projekte, aus denen sich die Enterprise Applikation zusammensetzt.
+ */
+rootProject.name = "MyFacesError"
+include 'MyFacesErrorWeb'
+
